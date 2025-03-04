@@ -23,6 +23,14 @@ class TestBooksCollector:
         # словарь books_rating, который нам возвращает метод get_books_rating, имеет длину 2
         assert len(collector.get_books_genre()) == 2
 
+    def test_add_new_book_double_books_adds_ones(self, collector, add_book):
+        collector.add_new_book(add_book)
+        assert len(collector.get_books_genre()) == 1
+
+    def test_add_new_book_with_long_name_book_does_not_add(self, collector):
+        collector.add_new_book('Тени прошлого: Путеводитель по забытому внутреннему миру')
+        assert len(collector.get_books_genre()) == 1
+
     # напиши свои тесты ниже
     # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
     @pytest.mark.parametrize('genre_name, expected_result', [
